@@ -5,7 +5,7 @@ const startButton=document.getElementById('start-btn').addEventListener("click",
      let hours=document.getElementById("hours").value;
      let minutes=document.getElementById("minutes").value;
      let seconds=document.getElementById("seconds").value;
-     console.log(hours,minutes,seconds);
+     
      //validating input values
      if(hours.length == 0) alert("Enter Hours value ");
      else if(minutes.length == 0) alert("Enter Minutes value ");
@@ -15,8 +15,8 @@ const startButton=document.getElementById('start-btn').addEventListener("click",
         let minute=parseInt(minutes);
         let second=parseInt(seconds);
         if(hour>23) hour=12;
-        if(minute > 60)  minute=60;
-        if(second > 60) second=60;
+        if(minute > 60)  minute=59;
+        if(second > 60) second=59;
         addTimer(hour,minute,second);
      }
 });
@@ -44,7 +44,7 @@ const startButton=document.getElementById('start-btn').addEventListener("click",
        <span id="sec">${second}</span>
      </div>
    </div>
-   <button id="delete-btn">Delete</button>`;
+   <button id="delete-btn" onclick="deleteFn(event)" >Delete</button>`;
     
     displaySection.append(timerDisplaySection.appendChild(div));
     startTimers();
@@ -70,10 +70,12 @@ const startButton=document.getElementById('start-btn').addEventListener("click",
         timer.className="end-timer-section";
         timer.innerHTML=`
         <h2>Timer Is Up !</h2>
-        <button id="stop-btn">Stop</button>
+        <audio controls autoplay style="display: none;">
+           <source src="https://mp3ringtonesdownload.net/wp-content/uploads/2023/07/Clock-Alarm-Classic.mp3" type="audio/mpeg">
+        </audio> 
+        <button id="stop-btn" onclick="stopAudio(event)">Stop</button>
         `;
-       
-
+      
       } else {
         if (second > 0) {
           second--;
@@ -97,6 +99,16 @@ const startButton=document.getElementById('start-btn').addEventListener("click",
   });
 }
 
+//stop audio
+function stopAudio(event){
+     const stopbutton=event.target;
+     const audioElement=stopbutton.parentNode.querySelector('audio');;
+     console.log(audioElement);
+     audioElement.pause();
+}
 
-
-
+//deleting element
+function deleteFn(event){
+  const clickedButton = event.target;
+   clickedButton.parentNode.remove();
+}
