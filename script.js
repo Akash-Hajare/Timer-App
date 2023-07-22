@@ -105,6 +105,7 @@ function stopAudio(event){
      const audioElement=stopbutton.parentNode.querySelector('audio');;
      console.log(audioElement);
      audioElement.pause();
+     stopbutton.parentNode.remove();
 }
 
 //deleting element
