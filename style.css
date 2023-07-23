@@ -2,6 +2,7 @@ body{
     margin: 0px;
     padding: 0px;
     color: white;
+    background-color: rgb(29,29,35);
 }
 .container{
     height: 100%;
